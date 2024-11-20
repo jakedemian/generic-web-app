@@ -1,3 +1,4 @@
-export class Message {
-  constructor(public id: number, public message: string) {}
-}
+export type Message = {
+  id: number;
+  message: string;
+};

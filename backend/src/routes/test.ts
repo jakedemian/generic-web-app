@@ -1,14 +1,16 @@
 import express from "express";
-import { getMessageRepository } from "../infrastructure/db";
-import { MessageService } from "../application/MessageService";
+import { getPool } from "../infrastructure/db";
+import { createMessageRepository } from "../domain/message/MessageRepository";
+import { createMessageService } from "../application/MessageService";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const repository = getMessageRepository();
-    const service = new MessageService(repository);
-    const message = await service.getMessage();
+    const pool = getPool();
+    const repository = createMessageRepository(pool);
+    const service = createMessageService(repository);
+    const message = await service.fetchMessage();
     res.json({ message: message || "No message found" });
   } catch (error) {
     console.error("Error fetching message:", error);

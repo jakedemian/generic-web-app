@@ -1,8 +1,6 @@
 import { Pool } from "pg";
-import { MessageRepository } from "../domain/message/MessageRepository";
 
 let pool: Pool;
-let messageRepository: MessageRepository;
 
 export const initializeDB = () => {
   pool = new Pool({
@@ -21,13 +19,12 @@ export const initializeDB = () => {
     console.error("Unexpected error on idle client", err);
     process.exit(-1);
   });
-
-  messageRepository = new MessageRepository(pool);
+  // Removed MessageRepository initialization
 };
 
-export const getMessageRepository = (): MessageRepository => {
-  if (!messageRepository) {
-    throw new Error("MessageRepository not initialized");
+export const getPool = (): Pool => {
+  if (!pool) {
+    throw new Error("Database not initialized");
   }
-  return messageRepository;
+  return pool;
 };
