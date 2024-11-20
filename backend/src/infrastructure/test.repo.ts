@@ -1,8 +1,9 @@
 import { Pool } from "pg";
-import { Message } from "./Message";
+import { Test } from "../domain/test/Test";
+import { TestRepository } from "../domain/test/TestRepoisitory";
 
-export const createMessageRepository = (pool: Pool) => {
-  const getMessage = async (): Promise<Message | null> => {
+export const createTestRepository = (pool: Pool): TestRepository => {
+  const getMessage = async (): Promise<Test | null> => {
     const res = await pool.query("SELECT * FROM test LIMIT 1");
     if (res.rows.length > 0) {
       const row = res.rows[0];
