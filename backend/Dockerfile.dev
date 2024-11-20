@@ -1,0 +1,23 @@
+# Backend/Dockerfile.dev
+
+# Use official Node.js image
+FROM node:18
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Install ts-node-dev globally for hot reloading
+RUN npm install -g ts-node-dev
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 5000
+
+# Start the backend with ts-node-dev
+CMD ["ts-node-dev", "--respawn", "--transpile-only", "src/index.ts"]
