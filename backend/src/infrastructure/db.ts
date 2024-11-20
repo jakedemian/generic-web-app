@@ -19,7 +19,6 @@ export const initializeDB = () => {
     console.error("Unexpected error on idle client", err);
     process.exit(-1);
   });
-  // Removed MessageRepository initialization
 };
 
 export const getPool = (): Pool => {

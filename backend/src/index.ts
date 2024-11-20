@@ -7,7 +7,6 @@ import cors from "cors";
 const app = express();
 const port = 5000;
 
-// Initialize Database
 initializeDB();
 
 app.use(bodyParser.json());

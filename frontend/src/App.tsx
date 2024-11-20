@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 const App: React.FC = () => {
   const [message, setMessage] = useState<string>("");
-  const apiUrl = process.env.REACT_APP_API_URL; // Import API URL from env
 
   const getMessage = async () => {
     try {
-      const response = await fetch(`${apiUrl}/test`); // Use the imported API URL
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/test`);
       const data = await response.json();
       setMessage(data.message);
     } catch (error) {

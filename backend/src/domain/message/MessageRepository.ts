@@ -13,6 +13,5 @@ export const createMessageRepository = (pool: Pool) => {
 
   return {
     getMessage,
-    // ...other repository methods...
   };
 };
